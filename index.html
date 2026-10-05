@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فعالیت ۲ | نقد خروجی مدل زبانی</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #f7fbfd, #eef7fa);
+      color: #10233f;
+    }
+    .card {
+      width: min(920px, 100%);
+      background: #fff;
+      border: 1px solid #d9e8ee;
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(16,35,63,.10);
+      padding: 36px;
+    }
+    .tag {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 12px;
+      border: 1px solid #cceeee;
+      border-radius: 999px;
+      background: #eaf8f8;
+      color: #0b7f86;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 0 0 10px;
+      color: #0c2746;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.35;
+    }
+    .lead {
+      margin: 0 0 26px;
+      color: #4b5f72;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+    .prompt {
+      background: #f8fbfc;
+      border: 2px solid #d7e8ee;
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+    .label {
+      margin-bottom: 10px;
+      color: #0b7f86;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    #promptText {
+      color: #142f4f;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 2;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 20px;
+      background: #0c7f88;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(12,127,136,.18);
+    }
+    button:hover { filter: brightness(.96); }
+    #status {
+      min-height: 20px;
+      color: #557080;
+      font-size: 14px;
+    }
+    .note {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #e3edf1;
+      color: #526778;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+    .note strong { color: #183b5f; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="tag">فعالیت ۲</div>
+    <h1>نقد خروجی مدل زبانی</h1>
+    <p class="lead">پرامپت زیر را بدون تغییر در یکی از مدل‌های زبانی اجرا کنید. پاسخ مدل را نگه دارید و سپس به کاربرگ گروه برگردید.</p>
+
+    <section class="prompt">
+      <div class="label">پرامپت</div>
+      <div id="promptText">در بیمارستان نیروانا، ۹ مورد از ۱۸ رخداد تنش‌آمیز ثبت‌شده در اورژانس اتفاق افتاده است. یک تحلیل کوتاه برای مدیر منابع انسانی بنویس: از این اطلاعات چه می‌توان فهمید، علت اصلی این وضعیت چیست و چه اقدام مشخصی برای بهبود آن پیشنهاد می‌کنی؟</div>
+    </section>
+
+    <div class="actions">
+      <button type="button" onclick="copyPrompt()">کپی پرامپت</button>
+      <div id="status"></div>
+    </div>
+
+    <div class="note"><strong>بعد از دریافت پاسخ:</strong> متن خروجی مدل را اصلاح نکنید. همان خروجی را مبنای فعالیت گروهی و تکمیل کاربرگ قرار دهید.</div>
+  </main>
+
+  <script>
+    async function copyPrompt() {
+      const text = document.getElementById('promptText').innerText.trim();
+      const status = document.getElementById('status');
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      status.textContent = 'پرامپت کپی شد.';
+      setTimeout(() => status.textContent = '', 2500);
+    }
+  </script>
+</body>
+</html>
